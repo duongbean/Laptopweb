@@ -3,15 +3,19 @@ package com.example.laptopshop.service;
 import java.util.*;
 import org.springframework.stereotype.Service;
 
+import com.example.laptopshop.repository.RoleRepository;
 import com.example.laptopshop.repository.UserRepository;
+import com.example.laptopshop.domain.Role;
 import com.example.laptopshop.domain.User;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public String handleHello() {
@@ -38,4 +42,7 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
+    public Role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
+    }
 }
